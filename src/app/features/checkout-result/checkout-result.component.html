@@ -1,0 +1,89 @@
+<section class="checkout-result">
+  <!-- Req. 6.1: pantalla de pago aprobado (éxito). -->
+  @if (result === 'success') {
+    <mat-card class="result-card result-card--success">
+      <mat-card-header>
+        <mat-icon class="result-icon result-icon--success" aria-hidden="true">check_circle</mat-icon>
+        <mat-card-title>¡Pago aprobado!</mat-card-title>
+        <mat-card-subtitle>Tu compra se completó correctamente</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          Recibimos la confirmación de tu pago. Te enviaremos los detalles de tu
+          orden en breve. ¡Gracias por tu compra!
+        </p>
+        <!-- Req. 6.x: detalles de la operación provistos por MercadoPago vía back_urls. -->
+        @if (hasOperationDetails) {
+          <dl class="operation-details">
+            @if (paymentId) { <div><dt>Número de operación</dt><dd>{{ paymentId }}</dd></div> }
+            @if (status) { <div><dt>Estado</dt><dd>{{ status }}</dd></div> }
+            @if (externalReference) { <div><dt>Referencia</dt><dd>{{ externalReference }}</dd></div> }
+            @if (merchantOrderId) { <div><dt>Orden</dt><dd>{{ merchantOrderId }}</dd></div> }
+          </dl>
+        }
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-raised-button color="primary" routerLink="/">Volver a la tienda</a>
+      </mat-card-actions>
+    </mat-card>
+  }
+
+  <!-- Req. 6.2: pantalla de pago rechazado (fallo), con opción de reintentar. -->
+  @if (result === 'failure') {
+    <mat-card class="result-card result-card--failure">
+      <mat-card-header>
+        <mat-icon class="result-icon result-icon--failure" aria-hidden="true">cancel</mat-icon>
+        <mat-card-title>El pago fue rechazado</mat-card-title>
+        <mat-card-subtitle>No pudimos procesar tu pago</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          Tu pago no se completó. Puedes volver al carrito para revisar tu compra
+          e intentar pagar nuevamente.
+        </p>
+        <!-- Req. 6.x: detalles de la operación provistos por MercadoPago vía back_urls. -->
+        @if (hasOperationDetails) {
+          <dl class="operation-details">
+            @if (paymentId) { <div><dt>Número de operación</dt><dd>{{ paymentId }}</dd></div> }
+            @if (status) { <div><dt>Estado</dt><dd>{{ status }}</dd></div> }
+            @if (externalReference) { <div><dt>Referencia</dt><dd>{{ externalReference }}</dd></div> }
+            @if (merchantOrderId) { <div><dt>Orden</dt><dd>{{ merchantOrderId }}</dd></div> }
+          </dl>
+        }
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-raised-button color="primary" routerLink="/cart">Volver al carrito</a>
+        <a mat-button routerLink="/">Volver a la tienda</a>
+      </mat-card-actions>
+    </mat-card>
+  }
+
+  <!-- Req. 6.3: pantalla de pago pendiente de confirmación. -->
+  @if (result === 'pending') {
+    <mat-card class="result-card result-card--pending">
+      <mat-card-header>
+        <mat-icon class="result-icon result-icon--pending" aria-hidden="true">hourglass_top</mat-icon>
+        <mat-card-title>Pago pendiente</mat-card-title>
+        <mat-card-subtitle>Tu pago está en proceso de confirmación</mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-content>
+        <p>
+          Estamos esperando la confirmación de tu pago. Te avisaremos cuando se
+          acredite. No es necesario que vuelvas a pagar.
+        </p>
+        <!-- Req. 6.x: detalles de la operación provistos por MercadoPago vía back_urls. -->
+        @if (hasOperationDetails) {
+          <dl class="operation-details">
+            @if (paymentId) { <div><dt>Número de operación</dt><dd>{{ paymentId }}</dd></div> }
+            @if (status) { <div><dt>Estado</dt><dd>{{ status }}</dd></div> }
+            @if (externalReference) { <div><dt>Referencia</dt><dd>{{ externalReference }}</dd></div> }
+            @if (merchantOrderId) { <div><dt>Orden</dt><dd>{{ merchantOrderId }}</dd></div> }
+          </dl>
+        }
+      </mat-card-content>
+      <mat-card-actions>
+        <a mat-raised-button color="primary" routerLink="/">Volver a la tienda</a>
+      </mat-card-actions>
+    </mat-card>
+  }
+</section>

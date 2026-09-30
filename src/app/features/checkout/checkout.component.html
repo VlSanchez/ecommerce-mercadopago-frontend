@@ -1,0 +1,58 @@
+<section class="checkout">
+  <mat-card class="checkout-card">
+    <mat-card-header>
+      <mat-card-title>Finalizar compra</mat-card-title>
+      <mat-card-subtitle>Elegí tu medio de pago</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Sin carrito activo: no se puede crear la preferencia (Req. 5.3). -->
+      @if (noCart) {
+        <p class="checkout-empty">
+          No hay un carrito activo. Volvé al carrito para agregar el producto.
+        </p>
+      } @else {
+        <!-- Resumen simple: total del carrito en CLP. -->
+        @if (cart) {
+          <div class="checkout-summary">
+            <span class="checkout-summary__label">Total a pagar</span>
+            <span class="checkout-summary__amount">{{ formatClp(cart.total) }}</span>
+          </div>
+        }
+
+        <!-- Selector de método de pago (MercadoPago preseleccionado). Extensible a más métodos. -->
+        <mat-radio-group
+          class="checkout-methods"
+          [(ngModel)]="selectedMethod"
+          (ngModelChange)="onMethodChange()"
+          aria-label="Selecciona un medio de pago"
+        >
+          @for (method of paymentMethods; track method.id) {
+            <mat-radio-button class="checkout-method" [value]="method.id">
+              <span class="checkout-method__title">
+                <mat-icon aria-hidden="true">{{ method.icon }}</mat-icon>
+                {{ method.label }}
+              </span>
+              <span class="checkout-method__desc">{{ method.description }}</span>
+            </mat-radio-button>
+          }
+        </mat-radio-group>
+
+        <!-- Estado de carga mientras se crea la preferencia / monta el Brick. -->
+        @if (loading) {
+          <div class="checkout-loading">
+            <mat-spinner diameter="32"></mat-spinner>
+            <span>Preparando el pago…</span>
+          </div>
+        }
+
+        <!-- Contenedor donde el SDK de MercadoPago monta el Wallet Brick. -->
+        <div [id]="walletContainerId" class="checkout-brick"></div>
+      }
+    </mat-card-content>
+
+    <mat-card-actions class="checkout-actions">
+      <a mat-button routerLink="/cart">Volver al carrito</a>
+    </mat-card-actions>
+  </mat-card>
+</section>

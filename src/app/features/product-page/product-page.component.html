@@ -1,0 +1,51 @@
+<section class="product-page">
+  <!-- Estado de carga inicial mientras se consulta el catálogo (Req. 1.1). -->
+  @if (loading) {
+    <div class="product-loading" role="status" aria-live="polite">
+      <mat-spinner diameter="48"></mat-spinner>
+      <p>Cargando producto…</p>
+    </div>
+  } @else if (loadError) {
+    <!-- Estado de error: producto no disponible o fallo de la petición (Req. 1.5).
+         No se muestran datos parciales del producto ni el botón de agregar. -->
+    <mat-card class="product-card product-card--error" role="alert">
+      <mat-card-header>
+        <mat-card-title>Producto no disponible</mat-card-title>
+      </mat-card-header>
+      <mat-card-content>
+        <p class="product-error">{{ loadError }}</p>
+      </mat-card-content>
+    </mat-card>
+  } @else if (product) {
+    <!-- Ficha del producto único (Req. 1.1): nombre, descripción y precio en CLP. -->
+    <mat-card class="product-card">
+      <mat-card-header>
+        <mat-card-title>{{ product.name }}</mat-card-title>
+        <mat-card-subtitle>{{ formatClp(product.price) }}</mat-card-subtitle>
+      </mat-card-header>
+      @if (product.imageUrl) {
+        <img mat-card-image [src]="product.imageUrl" [alt]="product.name" />
+      }
+      <mat-card-content>
+        <p class="product-description">{{ product.description }}</p>
+        <p class="product-price">{{ formatClp(product.price) }}</p>
+      </mat-card-content>
+      <mat-card-actions>
+        <!-- Agregar al carrito (Req. 2.1): crea el carrito si no existe y agrega el producto. -->
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="addToCart()"
+          [disabled]="addingToCart"
+        >
+          @if (addingToCart) {
+            <mat-spinner diameter="20"></mat-spinner>
+          } @else {
+            Agregar al carrito
+          }
+        </button>
+        <a mat-button routerLink="/cart">Ver carrito</a>
+      </mat-card-actions>
+    </mat-card>
+  }
+</section>

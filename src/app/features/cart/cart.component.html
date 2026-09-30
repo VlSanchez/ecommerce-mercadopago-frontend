@@ -1,0 +1,85 @@
+<section class="cart">
+  <mat-card class="cart-card">
+    <mat-card-header>
+      <mat-card-title>Carrito</mat-card-title>
+      <mat-card-subtitle>Revisá tu compra antes de pagar</mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content>
+      <!-- Carga inicial del carrito (Req. 3.1). -->
+      @if (loading) {
+        <div class="cart-loading">
+          <mat-spinner diameter="32"></mat-spinner>
+          <span>Cargando carrito…</span>
+        </div>
+      } @else if (isEmpty) {
+        <!-- Estado de carrito vacío / total 0 (Req. 3.4). -->
+        <p class="cart-empty">Tu carrito está vacío. Agregá el producto para continuar.</p>
+      } @else {
+        <!-- Ítem del carrito: cantidad, precio unitario y subtotal (Req. 3.1). -->
+        <div class="cart-item">
+          <div class="cart-item__info">
+            <span class="cart-item__label">Producto</span>
+            <span class="cart-item__unit">
+              Precio unitario: {{ formatClp(cart!.items[0].unitPrice) }}
+            </span>
+            <span class="cart-item__subtotal">
+              Subtotal: {{ formatClp(cart!.items[0].subtotal) }}
+            </span>
+          </div>
+
+          <!-- Ajuste de cantidad: entero 1..99 (Req. 3.2, 3.3). -->
+          <mat-form-field appearance="outline" class="cart-item__quantity">
+            <mat-label>Cantidad</mat-label>
+            <input
+              matInput
+              type="number"
+              name="quantity"
+              [min]="minQuantity"
+              [max]="maxQuantity"
+              step="1"
+              [disabled]="updating"
+              [(ngModel)]="quantity"
+              (change)="onQuantityChange(quantity)"
+            />
+          </mat-form-field>
+
+          <!-- Eliminar el ítem del carrito (Req. 3.4). -->
+          <button
+            mat-stroked-button
+            color="warn"
+            type="button"
+            class="cart-item__remove"
+            [disabled]="updating"
+            (click)="onRemove()"
+          >
+            <mat-icon>delete</mat-icon>
+            Eliminar
+          </button>
+        </div>
+
+        <!-- Total del carrito en CLP (Req. 3.1). -->
+        <div class="cart-total">
+          <span class="cart-total__label">Total</span>
+          <span class="cart-total__amount">{{ formatClp(cart!.total) }}</span>
+        </div>
+      }
+    </mat-card-content>
+
+    <mat-card-actions class="cart-actions">
+      <!-- Navegación de regreso a la página del producto. -->
+      <a mat-button routerLink="/">Volver al producto</a>
+
+      <!-- Botón "Continuar al pago": navega a la pantalla de checkout (Req. 5.3). -->
+      <button
+        mat-raised-button
+        color="primary"
+        type="button"
+        [disabled]="payDisabled"
+        (click)="onPay()"
+      >
+        <span>Continuar al pago</span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</section>

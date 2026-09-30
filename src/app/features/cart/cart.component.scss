@@ -1,0 +1,87 @@
+// Estilos del CartComponent (Req. 3.1, 3.4, 5.3).
+// Layout simple centrado, alineado con la ficha del producto.
+
+.cart {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.cart-card {
+  width: 100%;
+  max-width: 520px;
+}
+
+.cart-loading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem 0;
+}
+
+.cart-empty {
+  margin: 1rem 0;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+.cart-item {
+  display: flex;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding: 1rem 0;
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    flex: 1 1 auto;
+    min-width: 12rem;
+  }
+
+  &__label {
+    font-weight: 600;
+  }
+
+  &__unit,
+  &__subtotal {
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.9rem;
+  }
+
+  &__quantity {
+    width: 6.5rem;
+  }
+
+  &__remove {
+    align-self: center;
+  }
+}
+
+.cart-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  border-top: 1px solid rgba(0, 0, 0, 0.12);
+  padding-top: 1rem;
+  margin-top: 0.5rem;
+
+  &__label {
+    font-weight: 600;
+  }
+
+  &__amount {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+}
+
+.cart-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.cart-pay__label {
+  margin-left: 0.5rem;
+}

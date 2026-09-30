@@ -1,0 +1,55 @@
+// Estilos de la página del producto (tarea 14.1).
+// Layout centrado y contenido para la ficha del producto único (Req. 1.1).
+
+.product-page {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.product-card {
+  max-width: 480px;
+  width: 100%;
+}
+
+// Estado de error cuando el producto no está disponible (Req. 1.5).
+.product-card--error {
+  border-left: 4px solid var(--mat-sys-error, #b3261e);
+}
+
+.product-error {
+  margin: 0;
+  color: var(--mat-sys-error, #b3261e);
+}
+
+.product-description {
+  margin: 0.5rem 0 1rem;
+  line-height: 1.5;
+}
+
+// Precio en CLP destacado (Req. 1.2: indicación explícita de moneda).
+.product-price {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+// Estado de carga inicial.
+.product-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding: 2rem;
+}
+
+// Spinner dentro del botón mientras se agrega al carrito.
+mat-card-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  mat-spinner {
+    display: inline-block;
+  }
+}

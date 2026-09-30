@@ -1,0 +1,76 @@
+// Pantallas de retorno del pago (tarea 14.3 — Req. 6.1, 6.2, 6.3).
+.checkout-result {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.result-card {
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+}
+
+.result-card mat-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// Ícono grande con la señal cromática de cada estado.
+.result-icon {
+  font-size: 48px;
+  height: 48px;
+  width: 48px;
+  margin-bottom: 0.5rem;
+}
+
+// Verde para el pago aprobado (Req. 6.1).
+.result-icon--success {
+  color: #2e7d32;
+}
+
+// Rojo para el pago rechazado (Req. 6.2).
+.result-icon--failure {
+  color: #c62828;
+}
+
+// Ámbar para el pago pendiente (Req. 6.3).
+.result-icon--pending {
+  color: #f9a825;
+}
+
+// Detalles de la operación que MercadoPago envía vía back_urls (Req. 6.x).
+.operation-details {
+  margin: 1rem 0 0;
+  padding: 0.75rem 1rem;
+  background: rgba(0, 0, 0, 0.03);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  text-align: left;
+
+  div {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 0.2rem 0;
+  }
+
+  dt {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  dd {
+    margin: 0;
+    font-weight: 500;
+    word-break: break-all;
+  }
+}
+
+.result-card mat-card-actions {
+  display: flex;
+  gap: 0.5rem;
+  justify-content: center;
+  padding: 0.5rem 1rem 1rem;
+}

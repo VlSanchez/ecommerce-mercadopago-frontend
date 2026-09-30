@@ -1,0 +1,83 @@
+// Pantalla de checkout con selector de método y Wallet Brick (Req. 5.3).
+.checkout {
+  display: flex;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.checkout-card {
+  max-width: 480px;
+  width: 100%;
+}
+
+// Estado sin carrito activo.
+.checkout-empty {
+  margin: 0.5rem 0;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+// Resumen del total a pagar.
+.checkout-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin: 0.5rem 0 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+
+  &__label {
+    color: rgba(0, 0, 0, 0.6);
+  }
+
+  &__amount {
+    font-size: 1.4rem;
+    font-weight: 600;
+  }
+}
+
+// Lista de métodos de pago.
+.checkout-methods {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.checkout-method {
+  display: block;
+
+  &__title {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-weight: 500;
+  }
+
+  &__desc {
+    display: block;
+    margin-left: 1.75rem;
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.6);
+  }
+}
+
+// Indicador de carga mientras se prepara el pago.
+.checkout-loading {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 1rem 0;
+  color: rgba(0, 0, 0, 0.6);
+}
+
+// Contenedor del Wallet Brick de MercadoPago.
+.checkout-brick {
+  margin-top: 0.5rem;
+  min-height: 48px;
+}
+
+.checkout-actions {
+  display: flex;
+  justify-content: flex-start;
+  padding: 0.5rem 1rem 1rem;
+}
