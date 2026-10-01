@@ -33,5 +33,5 @@ export const environment = {
    * principal de MercadoPago (prefijo `APP_USR-`). No debe quedar la Public Key de
    * prueba hardcodeada en el build de producción.
    */
-  mercadoPagoPublicKey: 'APP_USR-cefa5906-9374-41e4-adeb-83eef48b2f87',
+  mercadoPagoPublicKey: 'APP_USR-2da70ee1-e7c6-491b-9ee0-1edbdda27174',
 };
